@@ -24,10 +24,15 @@ router.get("/:id", async (req, res) => {
   else res.send(result).status(200);
 });
 
+// Update grade by ID
 router.post("/", (req, res) => {
-  const grade = new Grades(req.body)
-  const savedGrade = grade.save()
-  res.json(savedGrade)
+  try {
+    const grade = new Grades(req.body)
+    const savedGrade = grade.save()
+    res.json(savedGrade)
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 })
 
 export default router;
